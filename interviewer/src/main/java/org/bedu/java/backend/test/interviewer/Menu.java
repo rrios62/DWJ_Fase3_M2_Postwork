@@ -16,7 +16,7 @@ public class Menu {
     public void showMainMenu() {
         int option = 0;
 
-        while (option != 3 ) {
+        while (option != 4 ) {
             System.out.println("Seleccione la operacion a realizar:");
             System.out.println("1. Dar de alta un entrevistador");
             System.out.println("2. Consultar un entrevistador");
@@ -31,6 +31,9 @@ public class Menu {
                     break;
                 case 2:
                     searchInterviewer();
+                    break;
+                case 3:
+                    modifyInterviewer();
                     break;
             }
         };
@@ -68,6 +71,49 @@ public class Menu {
             System.out.println("Entrevistador no encontrado");
         }
     }
+    public void modifyInterviewer() {
+        System.out.println("Ingrese el email del entrevistador a modificar:");
+        String email = sc.nextLine();
+
+        Interviewer interviewer = Interviewer.getByEmail(email);
+
+        if (interviewer != null) {
+            System.out.println("Entrevistador encontrado:");
+            System.out.println(interviewer.toString());
+
+            System.out.println("Ingrese el nuevo nombre del entrevistador (Presione Enter para mantener el valor actual):");
+            String newName = sc.nextLine();
+            if (!newName.isEmpty()) {
+                interviewer.setName(newName);
+            }
+
+            System.out.println("Ingrese el nuevo apellido del entrevistador (Presione Enter para mantener el valor actual):");
+            String newLastName = sc.nextLine();
+            if (!newLastName.isEmpty()) {
+                interviewer.setLastName(newLastName);
+            }
+
+            System.out.println("Ingrese el nuevo email del entrevistador (Presione Enter para mantener el valor actual):");
+            String newEmail = sc.nextLine();
+            if (!newEmail.isEmpty()) {
+                interviewer.setEmail(newEmail);
+            }
+
+            System.out.println("El entrevistador se encuentra activo? (1=Si/2=No, Presione Enter para mantener el valor actual):");
+            String isActiveInput = sc.nextLine();
+            Boolean isActive = null;
+            if (!isActiveInput.isEmpty()) {
+                isActive = isActiveInput.equals("1");
+                interviewer.setActive(isActive);
+            }
+
+            interviewer.save(newName, newLastName, newEmail, isActive);
+            System.out.println("Entrevistador modificado exitosamente.");
+        } else {
+            System.out.println("Entrevistador no encontrado");
+        }
+    }
+
 
     public static void main(String[] args) {
         new Menu();

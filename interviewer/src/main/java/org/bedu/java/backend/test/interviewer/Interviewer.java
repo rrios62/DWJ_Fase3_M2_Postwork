@@ -29,7 +29,23 @@ public class Interviewer implements Serializable {
               return this;
           }
 
-          public void save(
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public void save(
                   String name,
                   String lastName,
                   String email,
