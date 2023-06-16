@@ -20,7 +20,8 @@ public class Menu {
             System.out.println("Seleccione la operacion a realizar:");
             System.out.println("1. Dar de alta un entrevistador");
             System.out.println("2. Consultar un entrevistador");
-            System.out.println("3. Salir");
+            System.out.println("3. Consultar un entrevistador");
+            System.out.println("4. Salir");
 
             option = sc.nextInt();
             sc.nextLine();
