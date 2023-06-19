@@ -1,6 +1,6 @@
 package org.bedu.java.backend.test.interviewer;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Interviewer implements Serializable {
@@ -77,7 +77,37 @@ public class Interviewer implements Serializable {
         data.remove(this);
     }
 
+    public static void saveDataToFile() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("./interviewers");
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
 
+            outputStream.writeObject(Interviewer.data);
+
+            outputStream.close();
+            fileOutputStream.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    public static void loadDataFromFile() {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("./interviewers");
+            ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
+
+            ArrayList<Interviewer> fileData = (ArrayList<Interviewer>) inputStream.readObject();
+
+            Interviewer.data.clear();
+            Interviewer.data.addAll(fileData);
+
+            inputStream.close();
+            fileInputStream.close();
+        } catch (Exception e) {
+            if (!e.getMessage().contains("No such file or directory"))
+                e.printStackTrace();
+        }
+    }
     @Override
     public String toString() {
         return "\nID: " + this.id +
