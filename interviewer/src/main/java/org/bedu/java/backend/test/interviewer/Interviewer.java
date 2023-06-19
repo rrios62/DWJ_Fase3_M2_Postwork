@@ -73,6 +73,11 @@ public class Interviewer implements Serializable {
         return null;
     }
 
+    public void delete() {
+        data.remove(this);
+    }
+
+
     @Override
     public String toString() {
         return "\nID: " + this.id +
