@@ -27,6 +27,7 @@ class InterviewerTest {
     }
 
     @Test
+    @DisplayName("Test fort adding interviewer")
     void add() {
         Interviewer interviewer = new Interviewer(
                 "Test",
@@ -46,10 +47,44 @@ class InterviewerTest {
     }
 
     @Test
+    @DisplayName("Testin can save")
     void save() {
+        Interviewer interviewer = new Interviewer(
+                "Test",
+                "User",
+                "test@example.com",
+                true
+        );
+
+        interviewer.save("Updated", "LastName", "updated@example.com", false);
+
+        assertEquals(
+                "Updated",
+                interviewer.name,
+                "El nombre del entrevistador no coincide"
+        );
+        assertEquals(
+                "LastName",
+                interviewer.lastName,
+                "El apellido del entrevistador no coincide"
+        );
+        assertEquals(
+                "updated@example.com",
+                interviewer.email,
+                "El email del entrevistador no coincide"
+        );
+        assertFalse(
+                interviewer.isActive,
+                "El estado activo del entrevistador no coincide"
+        );
+        assertTrue(
+                Interviewer.data.contains(interviewer),
+                "El entrevistador no se agregó correctamente a la lista"
+        );
     }
 
     @Test
+    @DisplayName("Test find interviewer by mail")
     void getByEmail() {
         Interviewer result = Interviewer.getByEmail(existingInterviewerEmail);
 
@@ -65,8 +100,22 @@ class InterviewerTest {
                 "Unexpected Interviewer Last Name"
         );
     }
-
     @Test
+    @DisplayName("Can delete")
+    void testDelete(){
+        Interviewer interviewer = new Interviewer(
+                "Test",
+                "User",
+                "test@example.com",
+                true
+        );
+        interviewer.save("Updated", "LastName", "updated@example.com", false);
+        interviewer.getByEmail("updated@example.com");
+        interviewer.delete();
+
+    }
+    @Test
+    @DisplayName(" can set to string")
     void testToString() {
         String nonExistingEmail = "nonexisting@email.com";
 
