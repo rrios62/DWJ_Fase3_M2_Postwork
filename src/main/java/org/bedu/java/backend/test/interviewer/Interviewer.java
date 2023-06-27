@@ -5,30 +5,19 @@ import java.util.ArrayList;
 
 public class Interviewer implements Serializable {
     static ArrayList<Interviewer> data;
-        int id;
+        Long id;
         String name;
         String lastName;
         String email;
         Boolean isActive;
 
-          public Interviewer(
-             String name,
-             String lastName,
-             String email,
-             Boolean isActive
-             ){
-               this.id = data.size()+1;
+          public Interviewer(String name, String lastName, String email, Boolean isActive){
+               this.id = (long) (data.size()+1);
                this.name = name;
                this.lastName = lastName;
                this.email = email;
                this.isActive = isActive;
              }
-
-          public Interviewer add(){
-              data.add(this);
-              return this;
-          }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -43,6 +32,11 @@ public class Interviewer implements Serializable {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+    public Interviewer add(){
+          data.add(this);
+           return this;
     }
 
     public void save(
