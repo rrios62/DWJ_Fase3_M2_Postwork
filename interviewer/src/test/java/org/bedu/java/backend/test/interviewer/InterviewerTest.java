@@ -4,6 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+//Hamcrest
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +30,23 @@ class InterviewerTest {
                 true
         ));
     }
+
+    //prueba utilizando Hamcrest
+    @Test
+    @DisplayName("Test fpr adding with hamcrest")
+    void addHamcrest(){
+        Interviewer interviewer = new Interviewer(
+                "Test",
+                "User",
+                "test@example.com",
+                true
+        );
+
+        interviewer.add();
+        int expectedId = Interviewer.data.size();
+        assertThat(interviewer.id, is(equalTo(expectedId)));
+    }
+
 
     @Test
     @DisplayName("Test fort adding interviewer")

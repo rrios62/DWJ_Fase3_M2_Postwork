@@ -3,26 +3,30 @@ package org.bedu.java.backend.test.interviewer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static org.bedu.java.backend.test.interviewer.Interviewer.loadDataFromFile;
+import static org.bedu.java.backend.test.interviewer.Interviewer.saveDataToFile;
+
 public class Menu {
     Scanner sc;
 
     public Menu() {
         sc = new Scanner(System.in);
         Interviewer.data = new ArrayList<Interviewer>();
-
+        loadDataFromFile();
         showMainMenu();
     }
 
     public void showMainMenu() {
         int option = 0;
 
-        while (option != 5 ) {
+        while (option != 6 ) {
             System.out.println("Seleccione la operacion a realizar:");
             System.out.println("1. Dar de alta un entrevistador");
             System.out.println("2. Consultar un entrevistador");
             System.out.println("3. Modificar un entrevistador");
             System.out.println("4. Eliminar un entrevistador");
-            System.out.println("5. Salir");
+            System.out.println("5. Guardar");
+            System.out.println("6. Salir");
 
             option = sc.nextInt();
             sc.nextLine();
@@ -39,6 +43,9 @@ public class Menu {
                     break;
                 case 4:
                     deleteInterviewer();
+                    break;
+                case 5:
+                    saveDataToFile();
                     break;
             }
         };

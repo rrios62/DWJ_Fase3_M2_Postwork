@@ -6,7 +6,3 @@ out/
 *.ipr
 *.iws
 *.iml
-build.gradle
-gradle.properties
-gradlew
-gradlew.bat
