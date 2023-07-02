@@ -17,6 +17,8 @@ repositories {
 
 test {
 	useJUnitPlatform()
+	//configuración para ejecutar pruebas en paralelo
+	systemProperty 'junit.jupiter.execution.parallel.enabled', 'true'
 }
 
 dependencies {
@@ -27,8 +29,6 @@ dependencies {
 	testImplementation 'org.jacoco:org.jacoco.core:0.8.8'
 //se agrega Hamcrest
 	testImplementation 'org.hamcrest:hamcrest-library:2.2'
-
-
 
 }
 
