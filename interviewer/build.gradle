@@ -1,7 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.1.0'
-	id 'io.spring.dependency-management' version '1.1.0'
+	id "se.thinkcode.cucumber-runner" version "0.0.11"
 }
 
 group = 'org.bedu.java.backend.test'
@@ -11,14 +10,24 @@ java {
 	sourceCompatibility = '17'
 }
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
 
 test {
 	useJUnitPlatform()
-	//configuración para ejecutar pruebas en paralelo
 	systemProperty 'junit.jupiter.execution.parallel.enabled', 'true'
+}
+
+cucumber {
+	glue = "classpath:org.bedu.java.backend.test.interviewer.stepdefinitions"
+	main = "io.cucumber.core.cli.Main"
 }
 
 dependencies {
@@ -29,6 +38,11 @@ dependencies {
 	testImplementation 'org.jacoco:org.jacoco.core:0.8.8'
 //se agrega Hamcrest
 	testImplementation 'org.hamcrest:hamcrest-library:2.2'
+//Cucumber
+	compileOnly 'org.projectlombok:lombok:1.18.28'
+	annotationProcessor 'org.projectlombok:lombok:1.18.28'
+	implementation 'io.cucumber:cucumber-java:7.12.1'
+	implementation 'io.cucumber:cucumber-junit:7.12.1'
 
 }
 

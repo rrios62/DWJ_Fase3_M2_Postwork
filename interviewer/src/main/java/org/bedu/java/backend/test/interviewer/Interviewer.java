@@ -4,20 +4,22 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Interviewer implements Serializable {
-    static ArrayList<Interviewer> data;
-        int id;//Se cambio el tipo de dato a int para que la prueba de hamcrest pudiera correr
+    public static ArrayList<Interviewer> data;
+        public Long id;
         String name;
         String lastName;
         String email;
-        Boolean isActive;
+        public Boolean isActive;
 
           public Interviewer(String name, String lastName, String email, Boolean isActive){
-               this.id = (int) (data.size()+1);
+               this.id = (long) (data.size()+1);
                this.name = name;
                this.lastName = lastName;
                this.email = email;
                this.isActive = isActive;
              }
+    public Interviewer(){}
+
     public void setName(String name) {
         this.name = name;
     }
@@ -32,6 +34,22 @@ public class Interviewer implements Serializable {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Boolean getActive() {
+        return isActive;
     }
 
     public Interviewer add(){
@@ -64,6 +82,13 @@ public class Interviewer implements Serializable {
                 return interviewer;
         }
 
+        return null;
+    }
+
+    public static Interviewer showAll() {
+        for (Interviewer interviewer : data) {
+            System.out.println(interviewer.toString());
+        }
         return null;
     }
 

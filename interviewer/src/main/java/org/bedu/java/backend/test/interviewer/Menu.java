@@ -3,52 +3,43 @@ package org.bedu.java.backend.test.interviewer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static org.bedu.java.backend.test.interviewer.Interviewer.loadDataFromFile;
-import static org.bedu.java.backend.test.interviewer.Interviewer.saveDataToFile;
+import static org.bedu.java.backend.test.interviewer.Interviewer.*;
 
 public class Menu {
     Scanner sc;
 
     public Menu() {
         sc = new Scanner(System.in);
-        Interviewer.data = new ArrayList<Interviewer>();
-        loadDataFromFile();
+        Interviewer.data = new ArrayList<>();
+       // loadDataFromFile();
         showMainMenu();
     }
 
     public void showMainMenu() {
         int option = 0;
 
-        while (option != 6 ) {
+        while (option != 7 ) {
             System.out.println("Seleccione la operacion a realizar:");
             System.out.println("1. Dar de alta un entrevistador");
             System.out.println("2. Consultar un entrevistador");
             System.out.println("3. Modificar un entrevistador");
             System.out.println("4. Eliminar un entrevistador");
-            System.out.println("5. Guardar");
-            System.out.println("6. Salir");
+            System.out.println("5. Mostrar registros");
+            System.out.println("6. Guardar");
+            System.out.println("7. Salir");
 
             option = sc.nextInt();
             sc.nextLine();
 
             switch (option) {
-                case 1:
-                    addInterviewer();
-                    break;
-                case 2:
-                    searchInterviewer();
-                    break;
-                case 3:
-                    modifyInterviewer();
-                    break;
-                case 4:
-                    deleteInterviewer();
-                    break;
-                case 5:
-                    saveDataToFile();
-                    break;
+                case 1 -> addInterviewer();
+                case 2 -> searchInterviewer();
+                case 3 -> modifyInterviewer();
+                case 4 -> deleteInterviewer();
+                case 5 -> showAll();
+                case 6 -> saveDataToFile();
             }
-        };
+        }
 
         System.out.println("Programa terminado");
     }

@@ -3,29 +3,22 @@ package org.bedu.java.backend.test.interviewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
-
-//Hamcrest
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-
 
 import java.util.ArrayList;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Execution(ExecutionMode.CONCURRENT)//Anotacion para ejecutar pruebas en paralelo
 class InterviewerTest {
-    static String existingInterviewerName = "First";
-    static String existingInterviewerLastName = "User";
-    static String existingInterviewerEmail =  "first@email.com";
+    static String existingInterviewerName = "Aaron";
+    static String existingInterviewerLastName = "Rios";
+    static String existingInterviewerEmail =  "aaron@email.com";
 
     @BeforeEach
     public void setUp() throws Exception {
         Interviewer.data = new ArrayList<>();
-
-        // We insert a user for testing delete and save
         Interviewer.data.add(new Interviewer(
                 existingInterviewerName,
                 existingInterviewerLastName,
@@ -34,30 +27,13 @@ class InterviewerTest {
         ));
     }
 
-    //prueba utilizando Hamcrest
     @Test
-    @DisplayName("Test fpr adding with hamcrest")
-    void addHamcrest(){
-        Interviewer interviewer = new Interviewer(
-                "Test",
-                "User",
-                "test@example.com",
-                true
-        );
-
-        interviewer.add();
-        int expectedId = Interviewer.data.size();//Se cambio el tipo de dato del ID a int para que la prueba de hamcrest pudiera correr
-        assertThat(interviewer.id, is(equalTo(expectedId)));
-    }
-
-
-    @Test
-    @DisplayName("Test fort adding interviewer")
+    @DisplayName("Test for adding interviewer")
     void add() {
         Interviewer interviewer = new Interviewer(
-                "Test",
-                "User",
-                "any@email.com",
+                "Aaron",
+                "Rios",
+                "aaron@mail.com",
                 true
         );
 
@@ -72,12 +48,12 @@ class InterviewerTest {
     }
 
     @Test
-    @DisplayName("Testin can save")
+    @DisplayName("Testing can save")
     void save() {
         Interviewer interviewer = new Interviewer(
-                "Test",
-                "User",
-                "test@example.com",
+                "Aaron",
+                "Rios",
+                "@example.com",
                 true
         );
 
@@ -129,9 +105,9 @@ class InterviewerTest {
     @DisplayName("Can delete")
     void testDelete(){
         Interviewer interviewer = new Interviewer(
-                "Test",
-                "User",
-                "test@example.com",
+                "Aaron",
+                "Rios",
+                "aaron@mail.com",
                 true
         );
         interviewer.save("Updated", "LastName", "updated@example.com", false);
@@ -157,5 +133,21 @@ class InterviewerTest {
         Interviewer result = Interviewer.getByEmail(nonExistingEmail);
 
         assertNull(result, "Interviewer should not be found");
+    }
+
+    //prueba utilizando Hamcrest
+    @Test
+    @DisplayName("Test fpr adding with hamcrest")
+    void addHamcrest(){
+        Interviewer interviewer = new Interviewer(
+                "Aaron",
+                "Rios",
+                "Aaron@email.com",
+                true
+        );
+
+        interviewer.add();
+        Long expectedId = (long) Interviewer.data.size();
+        assertThat(interviewer.id, is(equalTo(expectedId)));
     }
 }
