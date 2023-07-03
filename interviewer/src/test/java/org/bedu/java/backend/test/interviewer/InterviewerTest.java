@@ -3,6 +3,8 @@ package org.bedu.java.backend.test.interviewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 //Hamcrest
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Execution(ExecutionMode.CONCURRENT)//Anotacion para ejecutar pruebas en paralelo
 class InterviewerTest {
     static String existingInterviewerName = "First";
     static String existingInterviewerLastName = "User";
@@ -43,7 +46,7 @@ class InterviewerTest {
         );
 
         interviewer.add();
-        int expectedId = Interviewer.data.size();
+        int expectedId = Interviewer.data.size();//Se cambio el tipo de dato del ID a int para que la prueba de hamcrest pudiera correr
         assertThat(interviewer.id, is(equalTo(expectedId)));
     }
 

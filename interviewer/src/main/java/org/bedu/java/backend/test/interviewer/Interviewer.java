@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class Interviewer implements Serializable {
     static ArrayList<Interviewer> data;
-        Long id;
+        int id;//Se cambio el tipo de dato a int para que la prueba de hamcrest pudiera correr
         String name;
         String lastName;
         String email;
         Boolean isActive;
 
           public Interviewer(String name, String lastName, String email, Boolean isActive){
-               this.id = (long) (data.size()+1);
+               this.id = (int) (data.size()+1);
                this.name = name;
                this.lastName = lastName;
                this.email = email;
